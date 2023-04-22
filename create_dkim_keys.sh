@@ -38,5 +38,8 @@ else
     chown ${PRIVATE_KEYS_USER}:${PRIVATE_KEYS_GROUP} ${KEY_NAME}.private
 
     # RESULT
-    cat ${KEY_NAME}.txt
+    # cat ${KEY_NAME}.txt
+    DKIM_VALUE="";
+    while IFS= read -r line ; do DKIM_VALUE+=$(echo $line | awk -F'"' '{print $2}'); done < ${KEY_NAME}.txt;
+    echo $DKIM_VALUE;
 fi
