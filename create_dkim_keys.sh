@@ -41,5 +41,8 @@ else
     # cat ${KEY_NAME}.txt
     DKIM_VALUE="";
     while IFS= read -r line ; do DKIM_VALUE+=$(echo $line | awk -F'"' '{print $2}'); done < ${KEY_NAME}.txt;
-    echo $DKIM_VALUE;
+    # echo $DKIM_VALUE;
+    
+    # INSERT INTO MYSQL
+    sudo sh ./create_dkim_keys.sh ${DOMAIN} "${KEY_NAME}._domainkey" $DKIM_VALUE
 fi
